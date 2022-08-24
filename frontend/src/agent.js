@@ -47,6 +47,9 @@ const Auth = {
 const Tags = {
   getAll: () => requests.get("/tags"),
 };
+const products = {
+  getAll: () => requests.get("/products"),
+};
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = (item) => Object.assign({}, item, { slug: undefined });
