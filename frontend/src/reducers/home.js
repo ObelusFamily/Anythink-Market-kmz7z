@@ -6,6 +6,7 @@ const reducer = (state = {}, action) => {
       return {
         ...state,
         tags: action.payload[0].tags,
+        products: action.payload[0].products,
       };
     case HOME_PAGE_UNLOADED:
       return {};

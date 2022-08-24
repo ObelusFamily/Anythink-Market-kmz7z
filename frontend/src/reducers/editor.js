@@ -19,6 +19,7 @@ const reducer = (state = {}, action) => {
         image: action.payload ? action.payload.item.image : "",
         tagInput: "",
         tagList: action.payload ? action.payload.item.tagList : [],
+        productList: action.payload ? action.payload.item.productList : [],
       };
     case EDITOR_PAGE_UNLOADED:
       return {};
@@ -38,11 +39,14 @@ const reducer = (state = {}, action) => {
         ...state,
         tagList: state.tagList.concat([state.tagInput]),
         tagInput: "",
+        productList: state.productList.concat([state.tagInput]),
+        tagInput: "",
       };
     case REMOVE_TAG:
       return {
         ...state,
         tagList: state.tagList.filter((tag) => tag !== action.tag),
+        productList: state.productList.filter((tag) => tag !== action.tag),
       };
     case UPDATE_FIELD_EDITOR:
       return { ...state, [action.key]: action.value };
