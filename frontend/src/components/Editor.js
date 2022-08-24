@@ -54,6 +54,7 @@ class Editor extends React.Component {
         description: this.props.description,
         image: this.props.image,
         tagList: this.props.tagList,
+        productList: this.props.productList,
       };
 
       const slug = { slug: this.props.itemSlug };
