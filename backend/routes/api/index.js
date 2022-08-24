@@ -4,7 +4,7 @@ router.use('/', require('./users'));
 router.use('/profiles', require('./profiles'));
 router.use('/items', require('./items'));
 router.use('/tags', require('./tags'));
-router.use('/tags', require('./products'));
+router.use('/products', require('./tags'));
 router.use('/ping', require('./ping'));
 
 router.use(function(err, req, res, next){
