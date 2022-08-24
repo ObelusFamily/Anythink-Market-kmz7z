@@ -68,6 +68,30 @@ const Items = {
   create: (item) => requests.post("/items", { item }),
 };
 
+const products = {
+  getAll: () => requests.get("/products"),
+};
+
+const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
+const omitSlug = (item) => Object.assign({}, item, { slug: undefined });
+const Items = {
+  all: (page) => requests.get(`/items?${limit(1000, page)}`),
+  bySeller: (seller, page) =>
+    requests.get(`/items?seller=${encode(seller)}&${limit(500, page)}`),
+  byTag: (tag, page) =>
+    requests.get(`/items?tag=${encode(tag)}&${limit(1000, page)}`),
+  del: (slug) => requests.del(`/items/${slug}`),
+  favorite: (slug) => requests.post(`/items/${slug}/favorite`),
+  favoritedBy: (seller, page) =>
+    requests.get(`/items?favorited=${encode(seller)}&${limit(500, page)}`),
+  feed: () => requests.get("/items/feed?limit=10&offset=0"),
+  get: (slug) => requests.get(`/items/${slug}`),
+  unfavorite: (slug) => requests.del(`/items/${slug}/favorite`),
+  update: (item) =>
+    requests.put(`/items/${item.slug}`, { item: omitSlug(item) }),
+  create: (item) => requests.post("/items", { item }),
+};
+
 const Comments = {
   create: (slug, comment) =>
     requests.post(`/items/${slug}/comments`, { comment }),
@@ -88,6 +112,7 @@ const agentObj = {
   Comments,
   Profile,
   Tags,
+  products,
   setToken: (_token) => {
     token = _token;
   },
